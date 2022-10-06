@@ -7,3 +7,17 @@ export async function obtenerClientes() {
     return resultado
 
 }
+
+export async function agregarCliente(datos) {
+
+    const urlClientes = import.meta.env.VITE_API_URL
+    const respuesta = await fetch(urlClientes, {
+        method: 'POST',
+        body: JSON.stringify(datos),
+        headers: {
+            'Content-Type':'application/json'
+        }
+    })
+    await respuesta.json()
+
+}
