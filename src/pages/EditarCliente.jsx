@@ -1,14 +1,57 @@
-import { Form, useLoaderData, useNavigate } from "react-router-dom"
+import { Form, redirect, useLoaderData, useNavigate } from "react-router-dom"
 import Formulario from "../components/Formulario"
-import { obtenerCliente } from "../data/clientes"
+import { actualizarCliente, obtenerCliente } from "../data/clientes"
 
 export async function loader({params}) {
 
-    console.log(params.idCliente)
-
     const cliente = await obtenerCliente(params.idCliente)
+
+    if (Object.values(cliente).length === 0) {
+
+        throw new Response ('', {
+            status: 404,
+            statusText: 'No hay Resultados'
+        })
+
+    }
     
     return cliente
+
+}
+
+export async function action({request, params}) {
+
+    const formData = await request.formData()
+
+    const datos = Object.fromEntries(formData)
+
+    const email = formData.get('email')
+
+    let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+
+    const errores = []
+
+    if (Object.values(datos).includes('')) {
+
+        errores.push('Todos los campos son obligatorios')
+
+    }
+
+    if (!regex.test(email)) {
+
+        errores.push('Formato de email invalido')
+
+    }
+
+    if (Object.keys(errores).length) {
+
+        return errores
+
+    }
+
+    await actualizarCliente(params.idCliente, datos)
+
+    return redirect('/')
 
 }
 
@@ -31,6 +74,9 @@ const EditarCliente = () => {
             </button>
         </div>
         <div className="bg-white shadow rounded-md md:w-3/4 mx-auto px-5 py-10 mt-20">
+            {
+
+            }
             <Form
                 method="post"
                 noValidate

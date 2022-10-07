@@ -20,14 +20,46 @@ export async function obtenerCliente(id) {
 
 export async function agregarCliente(datos) {
 
-    const urlClientes = import.meta.env.VITE_API_URL
-    const respuesta = await fetch(urlClientes, {
-        method: 'POST',
-        body: JSON.stringify(datos),
-        headers: {
-            'Content-Type':'application/json'
-        }
-    })
+    try {
+
+        const urlClientes = import.meta.env.VITE_API_URL
+        const respuesta = await fetch(urlClientes, {
+            method: 'POST',
+            body: JSON.stringify(datos),
+            headers: {
+                'Content-Type':'application/json'
+            }
+        })
+
     await respuesta.json()
+
+    } catch (error ) {
+
+        console.log(error)
+
+    }
+
+}
+
+export async function actualizarCliente(id, datos) {
+
+    try {
+
+        const urlCliente = `${import.meta.env.VITE_API_URL}/${id}`
+        const respuesta = await fetch(urlCliente, {
+            method: 'PUT',
+            body: JSON.stringify(datos),
+            headers: {
+                'Content-Type':'application/json'
+            }
+        })
+
+        await respuesta.json()
+
+    } catch (error) {
+
+        console.log(error)
+
+    }
 
 }
