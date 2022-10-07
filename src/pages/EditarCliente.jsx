@@ -1,9 +1,22 @@
-import { Form, useNavigate } from "react-router-dom"
+import { Form, useLoaderData, useNavigate } from "react-router-dom"
 import Formulario from "../components/Formulario"
+import { obtenerCliente } from "../data/clientes"
+
+export async function loader({params}) {
+
+    console.log(params.idCliente)
+
+    const cliente = await obtenerCliente(params.idCliente)
+    
+    return cliente
+
+}
 
 const EditarCliente = () => {
 
     const navigate = useNavigate()
+
+    const cliente = useLoaderData()
 
   return (
     <>
@@ -22,7 +35,9 @@ const EditarCliente = () => {
                 method="post"
                 noValidate
             >
-                <Formulario />
+                <Formulario 
+                    cliente={cliente}
+                />
                 <input 
                     type='submit'
                     className="mt-5 w-full bg-blue-800 p-3 uppercase font-bold text-white text-lg"
