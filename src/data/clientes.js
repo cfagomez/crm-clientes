@@ -57,3 +57,14 @@ export async function actualizarCliente(datos, id) {
     await respuesta.json()
 
 }
+
+export async function eliminarCliente(id) {
+
+    const urlCliente = `${import.meta.env.VITE_API_URL}/${id}`
+    const respuesta = await fetch(urlCliente, {
+        method: 'DELETE'
+    })
+    
+    await respuesta.json()
+
+}

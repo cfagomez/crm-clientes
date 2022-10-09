@@ -1,43 +1,20 @@
 {
   "clientes": [
     {
-      "nombre": "Karen (ACTUALIZADO!!!)",
-      "empresa": "Codigo Con Juan",
-      "email": "karen@juan.com",
-      "telefono": "138198313",
-      "notas": "ACTUALIZADO",
-      "id": 2
-    },
-    {
-      "nombre": "Josue",
-      "empresa": "Codigo Con Juan",
-      "email": "josue@juan.com",
-      "telefono": "31983913",
-      "notas": "NO ACTUALIZADO",
-      "id": 3
-    },
-    {
-      "nombre": "Miguel (ACTUALIZADO!!!)",
-      "empresa": "Codigo Con Juan",
-      "email": "miguel@juan.com",
-      "telefono": "319381983",
-      "notas": "ACTUALIZADO",
-      "id": 4
-    },
-    {
-      "id": 5,
-      "nombre": "Pedro",
-      "telefono": 1398198938,
-      "email": "pedro@juan.com",
-      "empresa": "Codigo Con Juan"
-    },
-    {
       "nombre": "Lola",
       "empresa": "Gomez S.A.",
       "email": "cuervog992@gmail.com",
       "telefono": "01165253575",
       "notas": "Guau Guau!!!",
       "id": 6
+    },
+    {
+      "nombre": "Ambarita",
+      "empresa": "Guau Guau SRL",
+      "email": "federicoagomez992@gmail.com",
+      "telefono": "01165253575",
+      "notas": "Zi jaj Holaz",
+      "id": 7
     }
   ]
 }
