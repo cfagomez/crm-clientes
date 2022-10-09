@@ -2,17 +2,17 @@
   "clientes": [
     {
       "id": 2,
-      "nombre": "Karen",
+      "nombre": "Dave",
       "telefono": 138198313,
-      "email": "karen@juan.com",
-      "empresa": "Codigo Con Juan"
+      "email": "dave@gmail.com",
+      "empresa": "Slayer"
     },
     {
       "id": 3,
-      "nombre": "Josue",
+      "nombre": "Nicko",
       "telefono": 31983913,
-      "email": "josue@juan.com",
-      "empresa": "Codigo Con Juan"
+      "email": "nicko@gmail.com",
+      "empresa": "Iron Maiden"
     },
     {
       "id": 4,
@@ -23,10 +23,10 @@
     },
     {
       "id": 5,
-      "nombre": "Pedro",
+      "nombre": "Chris",
       "telefono": 1398198938,
-      "email": "pedro@juan.com",
-      "empresa": "Codigo Con Juan"
+      "email": "chris@gmail.com",
+      "empresa": "Lamb of God"
     }
   ]
 }
