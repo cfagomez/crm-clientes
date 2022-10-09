@@ -25,33 +25,9 @@ export async function action({request, params}) {
 
     const datos = Object.fromEntries(formData)
 
-    const email = formData.get('email')
+    await actualizarCliente(datos, params.idCliente)
 
-    let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
-
-    const errores = []
-
-    if (Object.values(datos).includes('')) {
-
-        errores.push('Todos los campos son obligatorios')
-
-    }
-
-    if (!regex.test(email)) {
-
-        errores.push('Formato de email invalido')
-
-    }
-
-    if (Object.keys(errores).length) {
-
-        return errores
-
-    }
-
-    await actualizarCliente(params.idCliente, datos)
-
-    return redirect('/')
+    return {}
 
 }
 
