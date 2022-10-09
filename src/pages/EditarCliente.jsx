@@ -1,6 +1,7 @@
-import { Form, redirect, useLoaderData, useNavigate } from "react-router-dom"
+import { Form, redirect, useActionData, useLoaderData, useNavigate } from "react-router-dom"
 import Formulario from "../components/Formulario"
 import { actualizarCliente, obtenerCliente } from "../data/clientes"
+import Error from "../components/Error"
 
 export async function loader({params}) {
 
@@ -25,9 +26,33 @@ export async function action({request, params}) {
 
     const datos = Object.fromEntries(formData)
 
+    const email = formData.get('email')
+
+    let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+
+    const errores = []
+
+    if (Object.values(datos).includes('')) {
+
+        errores.push('Todos los campos son obligatorios')
+
+    }
+
+    if (!regex.test(email)) {
+
+        errores.push('Formato de email invalido')
+
+    }
+
+    if (Object.keys(errores).length) {
+
+        return errores
+
+    }
+
     await actualizarCliente(datos, params.idCliente)
 
-    return {}
+    return redirect('/')
 
 }
 
@@ -37,7 +62,10 @@ const EditarCliente = () => {
 
     const cliente = useLoaderData()
 
+    const errores = useActionData()
+
   return (
+
     <>
         <h1 className='font-black text-4xl text-blue-900'>Editar Cliente</h1>
         <p className='mt-3'>A continuacion, podras modificar los datos del cliente</p>
@@ -51,7 +79,13 @@ const EditarCliente = () => {
         </div>
         <div className="bg-white shadow rounded-md md:w-3/4 mx-auto px-5 py-10 mt-20">
             {
-
+            errores?.length && errores.map((error, i) => (
+                <Error
+                key={i}
+                >
+                {error}
+                </Error>
+            ))
             }
             <Form
                 method="post"
